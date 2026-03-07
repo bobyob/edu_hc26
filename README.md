@@ -1,8 +1,10 @@
-# Helper Guy – Presage Emotion Prototype
+# edu_hc26
+
+Helper Guy – Presage Emotion Prototype.
 
 This project is a small prototype that splits your idea into two pieces:
 
-- A **backend "brain" stub** that simulates Presage analysis.
+- A **backend \"brain\" stub** that simulates Presage analysis.
 - A **React-based camera moderator + helper UI** that runs in the browser.
 
 > Important: this repo does **not** include the real Presage SmartSpectra SDK. The backend currently returns mock metrics. Later, you will replace the stub logic with calls into the actual Presage C++ SDK running in WSL2.
@@ -21,25 +23,25 @@ The backend is a tiny Node.js HTTP server using only core modules (no external d
 
 - **Health check**
   - `GET /health`
-  - Returns `{ "status": "ok", "message": "Presage brain stub running" }`.
+  - Returns `{ \"status\": \"ok\", \"message\": \"Presage brain stub running\" }` (or proxy info when configured).
 
 - **Analyze frame**
   - `POST /analyze-frame`
   - Request body (JSON):
     - `image_base64` – **required**, base64-encoded JPEG frame captured from the webcam.
     - `request_id` – optional string, echoed back for tracking.
-    - `client_tag` – optional string to identify the caller (e.g. `"helper-ui"`).
+    - `client_tag` – optional string to identify the caller (e.g. `\"helper-ui\"`).
   - Response body (JSON):
     - `request_id`
     - `analysis`:
-      - `emotion` – `"neutral" | "happy" | "stressed" | "focused" | "tired"` (mocked).
+      - `emotion` – `\"neutral\" | \"happy\" | \"stressed\" | \"focused\" | \"tired\"` (mocked unless Presage is wired in).
       - `engagement` – number between 0–1.
       - `stress_level` – number between 0–1.
       - `heart_rate_bpm` – integer.
       - `breathing_rate_bpm` – integer.
       - `timestamp` – ISO string.
     - `source`:
-      - `kind` – currently `"single_frame"`.
+      - `kind` – currently `\"single_frame\"`.
       - `client_tag` – echoed from the request.
 
 ### Running the backend locally
@@ -49,15 +51,14 @@ The backend is a tiny Node.js HTTP server using only core modules (no external d
 
    ```bash
    cd backend
-   npm install   # currently no deps, but this will prepare node_modules if you add some later
    npm start
    ```
 
-3. The stub server will listen on `http://localhost:5000`.
+3. The server will listen on `http://localhost:5000`.
 
 Later, when you have WSL2 + Ubuntu + Presage SDK:
 
-- Replace the `buildMockAnalysis()` function in `server.js` with a call into your Presage-based analysis service (or move this HTTP layer directly into the Linux side).
+- Point `PRESAGE_SERVICE_URL` at your SmartSpectra-powered service so `/analyze-frame` can return real metrics instead of mocks.
 
 ## Frontend – React camera moderator + helper UI
 
@@ -80,7 +81,7 @@ Because React is loaded via CDN, you do **not** need any build tooling to try th
 3. Grant camera permission when prompted.
 4. You should see:
    - Your camera feed on the left.
-   - The helper avatar and metrics on the right, updating every ~2 seconds based on mock data.
+   - The helper avatar and metrics on the right, updating every ~2 seconds based on data from the backend.
 
 If the brain API is not running, you will see a message like:
 
@@ -92,7 +93,7 @@ This prototype isolates the contracts so you can drop in Presage later:
 
 - **React side (eyes + UI)** will stay almost the same.
 - **Backend side (brain)** will change:
-  - Instead of `buildMockAnalysis()`, call into a WSL2/Ubuntu service that uses the Presage SmartSpectra C++ SDK to analyze frames.
+  - Instead of the mock analysis, call into a WSL2/Ubuntu service that uses the Presage SmartSpectra C++ SDK to analyze frames.
   - Keep the same JSON shape for the response so the frontend does not care whether the data is mocked or real.
 
 That way, your helper app can start with fake emotion and then “go live” with Presage once your Linux environment and SDK integration are ready.
