@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Helper Guy – Presage Emotion Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #1d3557, #000814);
+        color: #f1faee;
+      }
+      #root {
+        width: 100%;
+        max-width: 960px;
+        padding: 24px;
+      }
+      .app-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+        gap: 24px;
+        background: rgba(10, 18, 36, 0.9);
+        border-radius: 16px;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+        padding: 24px;
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        backdrop-filter: blur(16px);
+      }
+      @media (max-width: 768px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+        }
+      }
+      .panel {
+        background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.06), rgba(15, 23, 42, 0.9));
+        border-radius: 12px;
+        padding: 16px 18px 18px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+      }
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .pill {
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.18);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .camera-view {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #020617;
+        min-height: 220px;
+      }
+      video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+      .camera-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border: 1px solid rgba(96, 165, 250, 0.4);
+        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+      }
+      .controls-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 10px;
+        font-size: 13px;
+        color: #cbd5f5;
+      }
+      button.primary {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: #02130a;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
+      }
+      button.primary:disabled {
+        opacity: 0.5;
+        cursor: default;
+        box-shadow: none;
+      }
+      .helper-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 24px;
+        background: radial-gradient(circle at 20% 0%, #4ade80, #22c55e 40%, #065f46 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        box-shadow: 0 18px 40px rgba(34, 197, 94, 0.55);
+      }
+      .helper-panel {
+        display: flex;
+        gap: 16px;
+      }
+      .helper-main {
+        flex: 1;
+      }
+      .helper-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .helper-emotion {
+        font-size: 13px;
+        color: #a5b4fc;
+        margin-bottom: 8px;
+      }
+      .helper-bubble {
+        background: rgba(15, 23, 42, 0.95);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+      }
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+        font-size: 12px;
+      }
+      .metric-card {
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(30, 64, 175, 0.7);
+      }
+      .metric-label {
+        color: #9ca3af;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 2px;
+      }
+      .metric-value {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #f97316;
+        box-shadow: 0 0 0 4px rgba(248, 148, 45, 0.25);
+        margin-right: 6px;
+      }
+      .status-dot.on {
+        background: #22c55e;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React via CDN to avoid local tooling requirements -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script>
+      const { useState, useEffect, useRef } = React;
+
+      const BRAIN_URL = 'http://localhost:5000';
+      const CAPTURE_INTERVAL_MS = 2000;
+
+      function emotionToMessage(emotion) {
+        switch (emotion) {
+          case 'happy':
+            return "You're lighting up right now. Let's ride that momentum.";
+          case 'stressed':
+            return "I'm picking up some stress. Want to slow down for a minute?";
+          case 'focused':
+            return "Laser focus detected. I’ll keep distractions away.";
+          case 'tired':
+            return "You look a bit worn out. Micro-break time?";
+          default:
+            return "I’m here, watching gently. Do your thing.";
+        }
+      }
+
+      function App() {
+        const videoRef = useRef(null);
+        const canvasRef = useRef(null);
+        const [cameraActive, setCameraActive] = useState(false);
+        const [lastAnalysis, setLastAnalysis] = useState(null);
+        const [status, setStatus] = useState('Idle – camera off');
+        const [error, setError] = useState(null);
+
+        useEffect(() => {
+          let stream;
+          let intervalId;
+
+          async function startCamera() {
+            try {
+              setError(null);
+              setStatus('Requesting camera access…');
+              stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+              if (videoRef.current) {
+                videoRef.current.srcObject = stream;
+              }
+              setCameraActive(true);
+              setStatus('Camera active. Sampling frames…');
+
+              intervalId = setInterval(captureAndSendFrame, CAPTURE_INTERVAL_MS);
+            } catch (err) {
+              console.error(err);
+              setError('Could not access camera. Check permissions.');
+              setStatus('Camera error');
+              setCameraActive(false);
+            }
+          }
+
+          async function captureAndSendFrame() {
+            try {
+              if (!videoRef.current || !canvasRef.current) return;
+              const video = videoRef.current;
+              const canvas = canvasRef.current;
+
+              if (video.readyState < 2) return;
+
+              const width = video.videoWidth;
+              const height = video.videoHeight;
+              if (!width || !height) return;
+
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(video, 0, 0, width, height);
+
+              const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+              const base64 = dataUrl.split(',')[1];
+
+              const payload = {
+                request_id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+                image_base64: base64,
+                client_tag: 'helper-ui'
+              };
+
+              const response = await fetch(BRAIN_URL + '/analyze-frame', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+
+              if (!response.ok) {
+                throw new Error('Brain API responded with status ' + response.status);
+              }
+
+              const data = await response.json();
+              setLastAnalysis(data);
+              setError(null);
+              setStatus('Receiving live emotion from brain stub');
+            } catch (err) {
+              console.error(err);
+              setError('Problem talking to brain API on localhost:5000.');
+              setStatus('Camera on, but brain unreachable');
+            }
+          }
+
+          startCamera();
+
+          return () => {
+            if (intervalId) clearInterval(intervalId);
+            if (stream) {
+              stream.getTracks().forEach(track => track.stop());
+            }
+          };
+        }, []);
+
+        const emotion = lastAnalysis?.analysis?.emotion ?? 'neutral';
+        const engagement = lastAnalysis?.analysis?.engagement ?? null;
+        const stress = lastAnalysis?.analysis?.stress_level ?? null;
+        const heartRate = lastAnalysis?.analysis?.heart_rate_bpm ?? null;
+        const breathing = lastAnalysis?.analysis?.breathing_rate_bpm ?? null;
+
+        const message = emotionToMessage(emotion);
+
+        return React.createElement(
+          'div',
+          { className: 'app-shell' },
+          React.createElement(
+            'div',
+            { className: 'panel' },
+            React.createElement(
+              'div',
+              { className: 'panel-header' },
+              React.createElement('div', null, 'Camera moderator'),
+              React.createElement('div', { className: 'pill' }, 'Live feed')
+            ),
+            React.createElement(
+              'div',
+              { className: 'camera-view' },
+              React.createElement('video', {
+                ref: videoRef,
+                autoPlay: true,
+                playsInline: true,
+                muted: true
+              }),
+              React.createElement('div', { className: 'camera-overlay' })
+            ),
+            React.createElement(
+              'div',
+              { className: 'controls-row' },
+              React.createElement(
+                'div',
+                { style: { display: 'flex', alignItems: 'center' } },
+                React.createElement('div', {
+                  className: 'status-dot' + (cameraActive ? ' on' : '')
+                }),
+                React.createElement('span', null, status)
+              ),
+              React.createElement(
+                'button',
+                {
+                  className: 'primary',
+                  disabled: true,
+                  title: 'Auto-capturing a frame every 2s'
+                },
+                'Auto capture 2s'
+              )
+            ),
+            error &&
+              React.createElement(
+                'div',
+                { style: { marginTop: 10, fontSize: 12, color: '#fecaca' } },
+                error
+              ),
+            React.createElement('canvas', {
+              ref: canvasRef,
+              style: { display: 'none' }
+            })
+          ),
+          React.createElement(
+            'div',
+            { className: 'panel' },
+            React.createElement(
+              'div',
+              { className: 'panel-header' },
+              React.createElement('div', null, 'Helper guy'),
+              React.createElement('div', { className: 'pill' }, 'Presage brain stub')
+            ),
+            React.createElement(
+              'div',
+              { className: 'helper-panel' },
+              React.createElement(
+                'div',
+                { className: 'helper-avatar' },
+                emotion === 'happy'
+                  ? '😊'
+                  : emotion === 'stressed'
+                  ? '😰'
+                  : emotion === 'focused'
+                  ? '🧠'
+                  : emotion === 'tired'
+                  ? '🥱'
+                  : '👀'
+              ),
+              React.createElement(
+                'div',
+                { className: 'helper-main' },
+                React.createElement(
+                  'div',
+                  { className: 'helper-title' },
+                  'Your ambient helper'
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'helper-emotion' },
+                  'Current read: ',
+                  React.createElement(
+                    'strong',
+                    null,
+                    emotion
+                  )
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'helper-bubble' },
+                  message
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'metrics-grid' },
+                  React.createElement(
+                    'div',
+                    { className: 'metric-card' },
+                    React.createElement('div', { className: 'metric-label' }, 'Engagement'),
+                    React.createElement(
+                      'div',
+                      { className: 'metric-value' },
+                      engagement != null ? Math.round(engagement * 100) + '%' : '—'
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'metric-card' },
+                    React.createElement('div', { className: 'metric-label' }, 'Stress'),
+                    React.createElement(
+                      'div',
+                      { className: 'metric-value' },
+                      stress != null ? Math.round(stress * 100) + '%' : '—'
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'metric-card' },
+                    React.createElement('div', { className: 'metric-label' }, 'Heart rate'),
+                    React.createElement(
+                      'div',
+                      { className: 'metric-value' },
+                      heartRate != null ? heartRate + ' bpm' : '—'
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'metric-card' },
+                    React.createElement('div', { className: 'metric-label' }, 'Breathing'),
+                    React.createElement(
+                      'div',
+                      { className: 'metric-value' },
+                      breathing != null ? breathing + ' bpm' : '—'
+                    )
+                  )
+                )
+              )
+            )
+          )
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
+
