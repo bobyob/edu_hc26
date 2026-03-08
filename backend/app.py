@@ -19,6 +19,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 # ── Try to import RPi display libraries (only available on actual Pi) ──
+# Figure out tailscale for privatized server access, and then restrict CORS to only allow that subnet
+# parent/tutors/teacher can access a student-users info
 try:
     from luma.core.interface.serial import i2c
     from luma.oled.device import ssd1306

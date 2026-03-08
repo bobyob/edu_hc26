@@ -21,6 +21,7 @@ class ImageData(BaseModel):
     image_base64: str
 
 # Helper function to map base emotions to student learning states
+# This is where you can customize the mapping based on your understanding of how emotions relate to learning states.
 def get_student_state(dominant_emotion):
     if dominant_emotion in ['angry', 'disgust']:
         return "frustrated"
@@ -52,6 +53,7 @@ async def analyze_emotion(data: ImageData):
             raise HTTPException(status_code=400, detail="Could not decode image")
 
         # Analyze emotion
+        # add more emotions for future feature (would that be necessary??)
         analysis = DeepFace.analyze(frame, actions=['emotion'], enforce_detection=False)
 
         # Extract the dominant emotion and the raw percentage scores
