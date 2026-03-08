@@ -66,7 +66,7 @@ async def analyze_emotion(data: ImageData):
         # Return both the custom string and the raw score dictionary
         return {
             "emotion": student_state,
-            "raw_scores": emotion_scores
+            "raw_scores": {k: float(v) for k, v in emotion_scores.items()}
         }
 
     except Exception as e:

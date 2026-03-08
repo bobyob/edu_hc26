@@ -1,0 +1,77 @@
+{
+  "sessions": [
+    {
+      "module": "math",
+      "difficulty": "easy",
+      "startTime": 1772970516774,
+      "emotions": [],
+      "answers": [
+        {
+          "questionId": "m-e-1",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-3",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-5",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-2",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-4",
+          "correct": true
+        }
+      ],
+      "completed": true,
+      "endTime": 1772970542412,
+      "score": 100,
+      "correctCount": 5,
+      "totalCount": 5,
+      "averageEmotion": "neutral",
+      "nextDifficulty": "medium",
+      "stored_at": "2026-03-08T07:49:02.737089"
+    },
+    {
+      "module": "math",
+      "difficulty": "easy",
+      "startTime": 1772970586551,
+      "emotions": [],
+      "answers": [
+        {
+          "questionId": "m-e-1",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-3",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-2",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-4",
+          "correct": true
+        },
+        {
+          "questionId": "m-e-5",
+          "correct": true
+        }
+      ],
+      "completed": true,
+      "endTime": 1772970687553,
+      "score": 100,
+      "correctCount": 5,
+      "totalCount": 5,
+      "averageEmotion": "neutral",
+      "nextDifficulty": "medium",
+      "stored_at": "2026-03-08T07:51:28.130320"
+    }
+  ],
+  "emotion_log": []
+}
