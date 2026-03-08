@@ -1,0 +1,361 @@
+{
+  "math": {
+    "easy": [
+      {
+        "id": "m-e-1",
+        "question": "What is 12 × 8?",
+        "options": ["86", "96", "106", "76"],
+        "answer": "96"
+      },
+      {
+        "id": "m-e-2",
+        "question": "What is the square root of 144?",
+        "options": ["11", "13", "12", "14"],
+        "answer": "12"
+      },
+      {
+        "id": "m-e-3",
+        "question": "What is 15% of 200?",
+        "options": ["25", "35", "30", "20"],
+        "answer": "30"
+      },
+      {
+        "id": "m-e-4",
+        "question": "Solve: 3x = 21. What is x?",
+        "options": ["5", "6", "7", "8"],
+        "answer": "7"
+      },
+      {
+        "id": "m-e-5",
+        "question": "What is 2³?",
+        "options": ["6", "8", "9", "4"],
+        "answer": "8"
+      }
+    ],
+    "medium": [
+      {
+        "id": "m-m-1",
+        "question": "What is the area of a circle with radius 5? (Use π ≈ 3.14)",
+        "options": ["78.5", "31.4", "25", "15.7"],
+        "answer": "78.5"
+      },
+      {
+        "id": "m-m-2",
+        "question": "Solve: 2x² - 8 = 0. What is x?",
+        "options": ["±1", "±4", "±2", "±3"],
+        "answer": "±2"
+      },
+      {
+        "id": "m-m-3",
+        "question": "What is the slope of a line passing through (2,4) and (6,12)?",
+        "options": ["1", "3", "2", "4"],
+        "answer": "2"
+      },
+      {
+        "id": "m-m-4",
+        "question": "Simplify: (3x²)(4x³)",
+        "options": ["7x⁵", "12x⁵", "12x⁶", "7x⁶"],
+        "answer": "12x⁵"
+      },
+      {
+        "id": "m-m-5",
+        "question": "What is the hypotenuse of a right triangle with legs 6 and 8?",
+        "options": ["12", "10", "14", "9"],
+        "answer": "10"
+      }
+    ],
+    "hard": [
+      {
+        "id": "m-h-1",
+        "question": "What is the derivative of f(x) = 3x³ - 5x² + 2x?",
+        "options": ["9x² - 10x + 2", "9x² - 5x + 2", "3x² - 10x + 2", "9x - 10x + 2"],
+        "answer": "9x² - 10x + 2"
+      },
+      {
+        "id": "m-h-2",
+        "question": "Solve: log₂(x) = 5. What is x?",
+        "options": ["10", "25", "32", "64"],
+        "answer": "32"
+      },
+      {
+        "id": "m-h-3",
+        "question": "What is the sum of the infinite geometric series: 1 + 1/2 + 1/4 + ...?",
+        "options": ["1.5", "2", "3", "∞"],
+        "answer": "2"
+      },
+      {
+        "id": "m-h-4",
+        "question": "Find the determinant of the matrix [[2,3],[1,4]]",
+        "options": ["5", "8", "11", "7"],
+        "answer": "5"
+      },
+      {
+        "id": "m-h-5",
+        "question": "What is ∫(2x + 3)dx?",
+        "options": ["x² + 3x", "x² + 3x + C", "2x² + 3x + C", "x + 3 + C"],
+        "answer": "x² + 3x + C"
+      }
+    ]
+  },
+  "science": {
+    "easy": [
+      {
+        "id": "s-e-1",
+        "question": "What is the chemical symbol for water?",
+        "options": ["HO", "H2O", "WA", "H3O"],
+        "answer": "H2O"
+      },
+      {
+        "id": "s-e-2",
+        "question": "What planet is closest to the Sun?",
+        "options": ["Venus", "Earth", "Mercury", "Mars"],
+        "answer": "Mercury"
+      },
+      {
+        "id": "s-e-3",
+        "question": "What gas do plants absorb during photosynthesis?",
+        "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+        "answer": "Carbon Dioxide"
+      },
+      {
+        "id": "s-e-4",
+        "question": "What is the powerhouse of the cell?",
+        "options": ["Nucleus", "Ribosome", "Mitochondria", "Golgi body"],
+        "answer": "Mitochondria"
+      },
+      {
+        "id": "s-e-5",
+        "question": "What force keeps planets in orbit around the Sun?",
+        "options": ["Magnetism", "Gravity", "Friction", "Nuclear force"],
+        "answer": "Gravity"
+      }
+    ],
+    "medium": [
+      {
+        "id": "s-m-1",
+        "question": "What is Newton's Second Law of Motion?",
+        "options": ["F = mv", "F = ma", "F = m/a", "F = a/m"],
+        "answer": "F = ma"
+      },
+      {
+        "id": "s-m-2",
+        "question": "What is the atomic number of Carbon?",
+        "options": ["6", "12", "8", "14"],
+        "answer": "6"
+      },
+      {
+        "id": "s-m-3",
+        "question": "In which organelle does photosynthesis occur?",
+        "options": ["Mitochondria", "Nucleus", "Chloroplast", "Vacuole"],
+        "answer": "Chloroplast"
+      },
+      {
+        "id": "s-m-4",
+        "question": "What type of bond shares electrons between atoms?",
+        "options": ["Ionic bond", "Hydrogen bond", "Covalent bond", "Metallic bond"],
+        "answer": "Covalent bond"
+      },
+      {
+        "id": "s-m-5",
+        "question": "What is the speed of light in a vacuum (approx)?",
+        "options": ["3×10⁶ m/s", "3×10⁸ m/s", "3×10¹⁰ m/s", "3×10⁴ m/s"],
+        "answer": "3×10⁸ m/s"
+      }
+    ],
+    "hard": [
+      {
+        "id": "s-h-1",
+        "question": "What is the Heisenberg Uncertainty Principle?",
+        "options": [
+          "Energy cannot be created or destroyed",
+          "You cannot know both position and momentum of a particle simultaneously",
+          "Every action has an equal and opposite reaction",
+          "Matter and energy are interchangeable"
+        ],
+        "answer": "You cannot know both position and momentum of a particle simultaneously"
+      },
+      {
+        "id": "s-h-2",
+        "question": "What is the process by which cells divide to produce gametes?",
+        "options": ["Mitosis", "Binary fission", "Meiosis", "Budding"],
+        "answer": "Meiosis"
+      },
+      {
+        "id": "s-h-3",
+        "question": "What is the half-life concept in radioactive decay?",
+        "options": [
+          "Time for all atoms to decay",
+          "Time for half the atoms to decay",
+          "Time for one atom to decay",
+          "Time for radiation to double"
+        ],
+        "answer": "Time for half the atoms to decay"
+      },
+      {
+        "id": "s-h-4",
+        "question": "Which law states that gases at the same temperature and pressure contain the same number of molecules?",
+        "options": ["Boyle's Law", "Charles's Law", "Avogadro's Law", "Dalton's Law"],
+        "answer": "Avogadro's Law"
+      },
+      {
+        "id": "s-h-5",
+        "question": "What is the primary role of mRNA in protein synthesis?",
+        "options": [
+          "Carries amino acids to ribosomes",
+          "Carries genetic instructions from DNA to ribosomes",
+          "Forms the structure of ribosomes",
+          "Breaks down proteins"
+        ],
+        "answer": "Carries genetic instructions from DNA to ribosomes"
+      }
+    ]
+  },
+  "english": {
+    "easy": [
+      {
+        "id": "e-e-1",
+        "question": "What is a metaphor?",
+        "options": [
+          "A comparison using 'like' or 'as'",
+          "A direct comparison without 'like' or 'as'",
+          "A figure of speech using exaggeration",
+          "A word that sounds like its meaning"
+        ],
+        "answer": "A direct comparison without 'like' or 'as'"
+      },
+      {
+        "id": "e-e-2",
+        "question": "Which of the following is a noun?",
+        "options": ["Run", "Quickly", "Beautiful", "Freedom"],
+        "answer": "Freedom"
+      },
+      {
+        "id": "e-e-3",
+        "question": "What is the plural of 'child'?",
+        "options": ["Childs", "Childes", "Children", "Childrens"],
+        "answer": "Children"
+      },
+      {
+        "id": "e-e-4",
+        "question": "Which sentence is grammatically correct?",
+        "options": [
+          "She don't know the answer.",
+          "She doesn't knows the answer.",
+          "She doesn't know the answer.",
+          "She not know the answer."
+        ],
+        "answer": "She doesn't know the answer."
+      },
+      {
+        "id": "e-e-5",
+        "question": "What literary device is used in 'The wind whispered through the trees'?",
+        "options": ["Simile", "Metaphor", "Personification", "Alliteration"],
+        "answer": "Personification"
+      }
+    ],
+    "medium": [
+      {
+        "id": "e-m-1",
+        "question": "What is the theme of a story?",
+        "options": [
+          "The main character's name",
+          "The setting of the story",
+          "The central idea or message",
+          "The sequence of events"
+        ],
+        "answer": "The central idea or message"
+      },
+      {
+        "id": "e-m-2",
+        "question": "What is dramatic irony?",
+        "options": [
+          "When the reader knows something the character doesn't",
+          "When a character says the opposite of what they mean",
+          "When events turn out opposite to expectations",
+          "When a character speaks directly to the audience"
+        ],
+        "answer": "When the reader knows something the character doesn't"
+      },
+      {
+        "id": "e-m-3",
+        "question": "Which of these is an example of alliteration?",
+        "options": [
+          "The sun set slowly",
+          "Peter Piper picked peppers",
+          "She sells seashells",
+          "Both B and C"
+        ],
+        "answer": "Both B and C"
+      },
+      {
+        "id": "e-m-4",
+        "question": "What is a protagonist?",
+        "options": [
+          "The villain of the story",
+          "The narrator of the story",
+          "The main character of the story",
+          "A minor supporting character"
+        ],
+        "answer": "The main character of the story"
+      },
+      {
+        "id": "e-m-5",
+        "question": "What tense is: 'She had finished her homework before dinner'?",
+        "options": ["Simple past", "Past progressive", "Past perfect", "Present perfect"],
+        "answer": "Past perfect"
+      }
+    ],
+    "hard": [
+      {
+        "id": "e-h-1",
+        "question": "What is the difference between a foil and an antagonist?",
+        "options": [
+          "They are the same thing",
+          "A foil contrasts with the protagonist; an antagonist opposes them",
+          "A foil is always the villain",
+          "An antagonist always contrasts with the protagonist"
+        ],
+        "answer": "A foil contrasts with the protagonist; an antagonist opposes them"
+      },
+      {
+        "id": "e-h-2",
+        "question": "What is a Petrarchan sonnet's rhyme scheme in the octave?",
+        "options": ["ABAB CDCD", "ABBAABBA", "ABABCDCD", "AABBCCDD"],
+        "answer": "ABBAABBA"
+      },
+      {
+        "id": "e-h-3",
+        "question": "What does 'verisimilitude' mean in literature?",
+        "options": [
+          "The use of symbols to represent ideas",
+          "The appearance of being true or real",
+          "A recurring theme across works",
+          "A type of narrative perspective"
+        ],
+        "answer": "The appearance of being true or real"
+      },
+      {
+        "id": "e-h-4",
+        "question": "Which narrative technique presents a character's thoughts as they occur?",
+        "options": [
+          "Third-person omniscient",
+          "Epistolary narrative",
+          "Stream of consciousness",
+          "Unreliable narrator"
+        ],
+        "answer": "Stream of consciousness"
+      },
+      {
+        "id": "e-h-5",
+        "question": "What is 'in medias res'?",
+        "options": [
+          "A story told in reverse chronological order",
+          "Beginning a story in the middle of the action",
+          "A flashback technique",
+          "A story within a story"
+        ],
+        "answer": "Beginning a story in the middle of the action"
+      }
+    ]
+  }
+}
