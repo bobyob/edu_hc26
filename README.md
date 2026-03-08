@@ -1,6 +1,6 @@
 # edu_hc26
 
-Helper Guy – Presage Emotion Prototype.
+Robot Assitant "Pebble" – Presage Emotion Prototype.
 
 This project is a small prototype that splits your idea into two pieces:
 
