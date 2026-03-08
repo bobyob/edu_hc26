@@ -90,14 +90,14 @@ export default function LandingPage() {
           <p className="text-gray-600 leading-relaxed mb-4">
             MyFocusFriend is an AI-powered study companion designed for
             high school and university students who struggle with focus,
-            motivation, and knowing how to study effectively.
+            motivation, and effective studying strategies.
           </p>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Using your device's camera, our system analyses your facial
+            Using your device's camera, our system analyzes your facial
             expressions in real-time. If you're frustrated or confused,
             questions become easier and your robot companion 'Pebble' reacts
             to encourage you. If you're doing well, questions ramp up to keep
-            you challenged.
+            you engaged in a challenge.
           </p>
           <p className="text-gray-600 leading-relaxed">
             Parents and tutors can securely access progress summaries to
@@ -110,7 +110,7 @@ export default function LandingPage() {
       {/* ── Footer ── */}
       <footer className="px-8 py-8 bg-white border-t border-gray-100 text-center">
         <p className="text-gray-400 text-sm">
-          © MyFocusFriend · Built for HackCanada 2026 @ Spur Inovation Campus
+          © MyFocusFriend · Built for HackCanada 2026 @ Spur Innovation Campus, Waterloo
         </p>
       </footer>
     </div>
