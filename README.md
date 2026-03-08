@@ -1,100 +1,39 @@
-# edu_hc26
+Why MyFocusFriend? The Canadian Context
+In 2025–2026, the Canadian educational landscape faces a "triple threat" that makes traditional study apps insufficient:
 
-Helper Guy – Presage Emotion Prototype.
+The Focus Crisis: Recent studies show that 89% of post-secondary students in Canada report feeling overwhelmed, with digital distractions (phones/social media) being a primary barrier to deep work.
 
-This project is a small prototype that splits your idea into two pieces:
+Mental Health Gaps: Over 75% of Canadian students report struggling with mental health, yet nearly half find university support services difficult to access or wait-listed.
 
-- A **backend \"brain\" stub** that simulates Presage analysis.
-- A **React-based camera moderator + helper UI** that runs in the browser.
+The Loneliness Epidemic: With the rise of hybrid and remote learning in provinces like Ontario and BC, many students study in total isolation, leading to high burnout rates and decreased motivation.
 
-> Important: this repo does **not** include the real Presage SmartSpectra SDK. The backend currently returns mock metrics. Later, you will replace the stub logic with calls into the actual Presage C++ SDK running in WSL2.
+MyFocusFriend addresses these issues by providing a physical presence that mimics the support of a live tutor or study group, helping students stay grounded and regulated.
 
-## Project layout
+🌟 The Core Experience
+The centerpiece is the Physical Study Buddy—a unique hardware shell housing a Raspberry Pi. It isn't just a gadget; it is a designed companion that offers:
 
-- `backend/`
-  - `package.json` – Node metadata.
-  - `server.js` – simple HTTP server exposing the brain API stub.
-- `frontend/`
-  - `index.html` – React UI (loaded from CDN) with camera access and helper avatar.
+Live Emotional Mirroring: Using a React camera feed and OpenCV, the system monitors the student’s face. When frustration is detected (a common precursor to "giving up" in tough Canadian STEM modules), the Raspberry Pi reacts.
 
-## Backend – brain API stub
+Dynamic Visuals: The Pi’s screen displays real-time "faces" (Happy, Sad, Frustrated, Neutral) to validate the student's feelings.
 
-The backend is a tiny Node.js HTTP server using only core modules (no external dependencies).
+Humanized AI Speaker: An integrated speaker provides vocal encouragement—e.g., "You've got this! Let's take a 5-minute break and come back to this math problem."—humanizing the experience and breaking the cycle of isolation.
 
-- **Health check**
-  - `GET /health`
-  - Returns `{ \"status\": \"ok\", \"message\": \"Presage brain stub running\" }` (or proxy info when configured).
+🚀 Key Technical Features
+1. Adaptive Academic Modules
+Subjects: Specialized curriculum for Math, Science, and English.
 
-- **Analyze frame**
-  - `POST /analyze-frame`
-  - Request body (JSON):
-    - `image_base64` – **required**, base64-encoded JPEG frame captured from the webcam.
-    - `request_id` – optional string, echoed back for tracking.
-    - `client_tag` – optional string to identify the caller (e.g. `\"helper-ui\"`).
-  - Response body (JSON):
-    - `request_id`
-    - `analysis`:
-      - `emotion` – `\"neutral\" | \"happy\" | \"stressed\" | \"focused\" | \"tired\"` (mocked unless Presage is wired in).
-      - `engagement` – number between 0–1.
-      - `stress_level` – number between 0–1.
-      - `heart_rate_bpm` – integer.
-      - `breathing_rate_bpm` – integer.
-      - `timestamp` – ISO string.
-    - `source`:
-      - `kind` – currently `\"single_frame\"`.
-      - `client_tag` – echoed from the request.
+Dynamic Difficulty Scaling: A JSON-driven quiz engine monitors correctness. If a student answers two questions correctly, it scales up; if they struggle, it scales back to rebuild confidence, directly addressing the "boredom/frustration" drop-out risk cited in Canadian educational research.
 
-### Running the backend locally
+2. Dual-Insight Dashboards
+Student Summary: Displays a "Mood Dial" showing average emotional resilience during the session, total questions right, and scores.
 
-1. Install Node.js (any current LTS is fine) so that `node` and `npm` work in your terminal.
-2. Open a terminal at the `backend` folder:
+Parent/Tutor Summary: Provides data on total session frequency and "next steps," allowing parents to act as "coaches" rather than critics.
 
-   ```bash
-   cd backend
-   npm start
-   ```
+🛠️ Technical Stack
+Frontend: React, JavaScript, Tailwind CSS (High-fidelity Figma matching).
 
-3. The server will listen on `http://localhost:5000`.
+Backend: Python + Flask (Relays emotion data from the browser to the Raspberry Pi).
 
-Later, when you have WSL2 + Ubuntu + Presage SDK:
+AI/ML: OpenCV for real-time facial analysis.
 
-- Point `PRESAGE_SERVICE_URL` at your SmartSpectra-powered service so `/analyze-frame` can return real metrics instead of mocks.
-
-## Frontend – React camera moderator + helper UI
-
-The frontend is a single HTML file that:
-
-- Uses `getUserMedia` to open the webcam.
-- Every 2 seconds, captures a frame into a hidden `<canvas>`.
-- Sends the frame as base64 JPEG to `POST http://localhost:5000/analyze-frame`.
-- Displays:
-  - A **live camera preview**.
-  - A **helper avatar** whose emoji and text react to the latest `emotion`.
-  - A **metrics grid** showing engagement, stress, heart rate, and breathing rate.
-
-Because React is loaded via CDN, you do **not** need any build tooling to try the UI.
-
-### Using the frontend
-
-1. Make sure the backend is running on `http://localhost:5000`.
-2. Open `frontend/index.html` in a modern browser (Chrome/Edge).
-3. Grant camera permission when prompted.
-4. You should see:
-   - Your camera feed on the left.
-   - The helper avatar and metrics on the right, updating every ~2 seconds based on data from the backend.
-
-If the brain API is not running, you will see a message like:
-
-- “Problem talking to brain API on localhost:5000.”
-
-## Where Presage fits later
-
-This prototype isolates the contracts so you can drop in Presage later:
-
-- **React side (eyes + UI)** will stay almost the same.
-- **Backend side (brain)** will change:
-  - Instead of the mock analysis, call into a WSL2/Ubuntu service that uses the Presage SmartSpectra C++ SDK to analyze frames.
-  - Keep the same JSON shape for the response so the frontend does not care whether the data is mocked or real.
-
-That way, your helper app can start with fake emotion and then “go live” with Presage once your Linux environment and SDK integration are ready.
-
+Hardware: Raspberry Pi (Dedicated screen + Audio output).
